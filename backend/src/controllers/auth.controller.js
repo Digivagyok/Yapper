@@ -118,7 +118,7 @@ export const checkAuth = async (request, response) => {
     try {
         response.status(200).json(request.user);
     } catch (error) {
-        console.log("Hiba a checkAuth controllerben", error.message);
+        console.log("Hiba a checkAuth controllerben", error);
         response.status(500).json({message: "Internal server error"});
     }
 };
