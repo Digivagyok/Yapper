@@ -1,7 +1,7 @@
 export default function ProfilePage(){
     return (
         <div>
-            Navbar
+            PROFILE
         </div>
     )
 };

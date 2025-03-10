@@ -1,7 +1,7 @@
 export default function SettingsPage(){
     return (
         <div>
-            Navbar
+            SETTINGS
         </div>
     )
 };
