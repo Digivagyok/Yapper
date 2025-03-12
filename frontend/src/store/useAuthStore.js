@@ -34,6 +34,30 @@ const useAuthStore = create((set) => ({
         } finally {
             set({isSigningUp: false});
         }
+    },
+
+    login: async(data) => {
+        set({isLoggingIn: true});
+
+        try {
+            const response = await axiosInstance.post("/auth/login", data);
+            set({authUser: response.data});
+            toast.success("Sikeres bejelentkezés");
+        } catch (error) {
+            toast.error(error.response.data.message);
+        } finally {
+            set({isLoggingIn: false});
+        }
+    },
+
+    logout: async () => {
+        try {
+            await axiosInstance.post("/auth/logout");
+            set({authUser: null});
+            toast.success("Sikeres kijelentkezés");
+        } catch(error){
+            toast.error(error.response.data.message);
+        }
     }
 }));
 
