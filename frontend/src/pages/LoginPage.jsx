@@ -6,6 +6,8 @@ import useAuthStore from "../store/useAuthStore";
 import { Mail, MessageSquare, User, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 
 import AboveForm from "../components/AboveForm";
+import EmailInput from "../components/EmailInput";
+import PasswordInput from "../components/PasswordInput";
 
 export default function LoginPage(){
     const [showPassword, setShowPassword] = useState(false);
@@ -75,52 +77,10 @@ export default function LoginPage(){
                     <form onSubmit={handleSubmit} className="space-y-6">
                         
                         {/* EMAIL */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-medium">Email</span>
-                            </label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
-                                    <Mail className="size-5 text-base-content/40" />
-                                </div>
-                                <input
-                                    type="email"
-                                    className={`input input-bordered w-full pl-10`}
-                                    placeholder="neved@domain.hu"
-                                    value={formData.email}
-                                    name="email"
-                                    onChange={handleChange}
-                                />
-                            </div>
-                        </div>
+                        <EmailInput formData={formData} handleChange={handleChange} />
 
                         {/* JELSZÓ */}
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-medium">Jelszó</span>
-                            </label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
-                                    <Lock className="size-5 text-base-content/40" />
-                                </div>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    className={`input input-bordered w-full pl-10`}
-                                    placeholder="●●●●●●●●"
-                                    value={formData.password}
-                                    name="password"
-                                    onChange={handleChange}
-                                />
-                                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                                    onClick={handlePasswordShow}>
-                                        {showPassword ? (
-                                            <EyeOff className="size-5 text-base-content/40" />
-                                        ) : (
-                                            <Eye className="size-5 text-base-content/40" />
-                                        )}
-                                </button>
-                            </div>
-                        </div>
+                        <PasswordInput formData={formData} handleChange={handleChange} showPassword={showPassword} handlePasswordShow={handlePasswordShow}/>
 
                         {/* LÉTREHOZÁS */}
                         <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
