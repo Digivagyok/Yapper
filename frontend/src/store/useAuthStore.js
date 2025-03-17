@@ -7,8 +7,9 @@ const useAuthStore = create((set) => ({
     isSigningUp: false,
     isLoggingIn: false,
     isUpdatingProfile: false,
-    
     isCheckingAuth: true,
+    onlineUsers: [],
+    
     checkAuth: async () => {
         try {
             const response = await axiosInstance.get("/auth/check");
@@ -72,7 +73,7 @@ const useAuthStore = create((set) => ({
         } finally {
             set({isUpdatingProfile: false});
         }
-    }
+    },
 }));
 
 export default useAuthStore;

@@ -40,7 +40,7 @@ export default function ProfilePage() {
                     {/* képfeltöltés*/}
                     <div className="flex flex-col items-center gap-4">
                         <div className="relative">
-                            <img src={selectedImg || authUser.profilePic || "./vite.svg"}
+                            <img src={selectedImg || authUser.profilePic || "/avatar.jpg"}
                             alt="ProfilePicture"
                             className="size-32 rounded-full object-cover border-4">
                             </img>
