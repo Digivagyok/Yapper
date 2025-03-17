@@ -4,7 +4,7 @@ export default function AboveForm(params) {
     const {h1tagcontent, ptagcontent} = params.content;
 
     return (
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 ">
             <div className="flex flex-col items-center gap-2 group">
                 <div className="size-12 rounded-xl bg-primary/10
                                 flex items-center justify-center

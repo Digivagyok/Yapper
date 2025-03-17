@@ -62,7 +62,7 @@ export default function LoginPage(){
     }
 
     return (
-        <div>
+        <div className="h-screen grid pt-20">
             {/*LEFT SIDE*/}
             <div className="flex flex-col justify-center items-center p-6 sm:p-12">
                 <div className="w-full max-w-md space-y-8">
