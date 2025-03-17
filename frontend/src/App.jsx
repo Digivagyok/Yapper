@@ -21,6 +21,10 @@ function App() {
   const { theme } = useThemeStore();
 
   useEffect(() => {
+    document.querySelector('html').setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
@@ -35,7 +39,7 @@ function App() {
   }
 
   return (
-    <div data-theme={theme}>
+    <div >
       <BrowserRouter>
         <Navbar></Navbar>
         <Routes>
