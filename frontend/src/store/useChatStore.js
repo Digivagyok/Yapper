@@ -9,6 +9,7 @@ export const useChatStore = create((set,get) => ({
     selectedUser: null,
     isUsersLoading: false,
     isMessagesLoading: false,
+    showSideBar: true,
 
     getUsers: async () => {
         set({isUsersLoading: true});
@@ -71,4 +72,6 @@ export const useChatStore = create((set,get) => ({
 
     //TODO optimize this
     setSelectedUser: (selectedUser) => set({selectedUser}),
+
+    setShowSideBar: () => set({showSideBar: !get().showSideBar}),
 }))
