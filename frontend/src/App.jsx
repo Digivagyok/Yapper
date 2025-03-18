@@ -20,7 +20,7 @@ function App() {
   const { authUser, isCheckingAuth, checkAuth, onlineUsers} = useAuthStore();
   const { theme } = useThemeStore();
 
-  console.log(onlineUsers);
+  //console.log(onlineUsers);
 
   useEffect(() => {
     document.querySelector('html').setAttribute('data-theme', theme);
