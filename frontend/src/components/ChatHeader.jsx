@@ -13,7 +13,6 @@ export default function ChatHeader() {
     }
 
     const showSideBarHandler = () => {
-        console.log("asd");
         setShowSideBar(!showSideBar);
     }
 
