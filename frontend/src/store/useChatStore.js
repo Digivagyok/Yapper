@@ -73,5 +73,5 @@ export const useChatStore = create((set,get) => ({
     //TODO optimize this
     setSelectedUser: (selectedUser) => set({selectedUser}),
 
-    setShowSideBar: () => set({showSideBar: !get().showSideBar}),
+    setShowSideBar: (showSideBarState) => set({showSideBar: showSideBarState}),
 }))

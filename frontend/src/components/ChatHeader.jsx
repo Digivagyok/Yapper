@@ -9,11 +9,12 @@ export default function ChatHeader() {
 
     const closeButtonHandler = () => {
         setSelectedUser(null);
+        setShowSideBar(true);
     }
 
     const showSideBarHandler = () => {
         console.log("asd");
-        setShowSideBar();
+        setShowSideBar(!showSideBar);
     }
 
     return (
