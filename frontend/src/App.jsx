@@ -95,6 +95,13 @@ function App() {
       console.error("Manifest link not found.");
     }
 
+    let themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+    if (!themeColorMetaTag) {
+        themeColorMetaTag = document.createElement('meta');
+        themeColorMetaTag.setAttribute('name', 'theme-color');
+        document.head.appendChild(themeColorMetaTag);
+    }
+    themeColorMetaTag.setAttribute('content', currentThemeColors.theme_color);
     //console.log("Generated manifest URL:", manifestURL);
     //console.log("Manifest link updated:", manifestLink);
   }, [theme]);
