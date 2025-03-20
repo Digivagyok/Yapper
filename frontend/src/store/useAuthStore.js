@@ -87,21 +87,32 @@ const useAuthStore = create((set, get) => ({
     },
 
     connectSocket: () => {
-        const {authUser} = get();
-        if (!authUser || get().socket?.connected){
+        const { authUser } = get();
+        if (!authUser || !authUser._id || get().socket?.connected) {
             return;
         }
+    
+        console.log("Connecting WebSocket with userId:", authUser._id); // Debugging log
+    
         const socket = io(BASE_URL, {
             query: {
                 userId: authUser._id,
             },
         });
-        socket.connect();
-
+    
+        socket.on("connect", () => {
+            console.log("WebSocket connected:", socket.id);
+        });
+    
+        socket.on("disconnect", () => {
+            console.log("WebSocket disconnected");
+        });
+    
         set({ socket: socket });
-
+    
         socket.on("getOnlineUsers", (userIds) => {
-            set({ onlineUsers: userIds});
+            console.log("Online users received:", userIds); // Debugging log
+            set({ onlineUsers: userIds });
         });
     },
 
@@ -110,7 +121,14 @@ const useAuthStore = create((set, get) => ({
             get().socket.disconnect();
         }
 
-    }
+    },
+
+    updateActivity: (activeChat) => {
+        const { authUser, socket } = get();
+        if (authUser && socket?.connected) {
+            socket.emit("updateActivity", { userId: authUser._id, activeChat });
+        }
+    },
 }));
 
 export default useAuthStore;

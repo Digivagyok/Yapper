@@ -12,10 +12,17 @@ const io = new Server(server, {
 });
 
 export function getReceiverSocketId(userId) {
+    console.log("Getting receiver socket ID for user:", userId);
+    console.log("Current userSocketMap:", userSocketMap);
     return userSocketMap[userId];
 }
 
+export function getUserActivity(userId) {
+    return userActivityMap[userId] || null;
+}
+
 const userSocketMap = {}; // {userId: socketId} 
+const userActivityMap = {}; // { userId: { activeChat: senderId, socketId: socketId } }
 
 io.on("connection", (socket) => {
     console.log("Egy felhasználó csatlakozott: ", socket.id);
@@ -27,9 +34,32 @@ io.on("connection", (socket) => {
 
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
+    // Listen for activity updates
+    socket.on("updateActivity", ({ userId, activeChat }) => {
+        if (userId) {
+            if (activeChat) {
+                // Update the user's activity to reflect the active chat
+                userActivityMap[userId] = { activeChat, socketId: socket.id };
+            } else {
+                // Clear the user's activity if activeChat is null
+                delete userActivityMap[userId];
+            }
+            console.log("User activity updated:", userActivityMap);
+        }
+    });
+
     socket.on("disconnect", () => {
         console.log("Egy felhasználó lecsatlakozott: ", socket.id);
-        delete userSocketMap[userId];
+
+        // Remove the user from the socket map and activity map
+        for (const [userId, socketId] of Object.entries(userSocketMap)) {
+            if (socketId === socket.id) {
+                delete userSocketMap[userId];
+                delete userActivityMap[userId];
+                break;
+            }
+        }
+
         io.emit("getOnlineUsers", Object.keys(userSocketMap));
     });
 });
