@@ -46,9 +46,20 @@ webPush.setVapidDetails(
 );
 
 const checkIfUserIsActiveOnChat = (receiverId, senderId) => {
-    // Example logic: Check if the user is on the chat page with the sender
     const userActivity = getUserActivity(receiverId); // Retrieve user activity from your WebSocket logic
-    return userActivity && userActivity.activeChat === senderId;
+    console.log("Checking if user is active on chat:");
+    console.log("Receiver ID:", receiverId);
+    console.log("Sender ID:", senderId);
+    console.log("User Activity:", userActivity);
+
+    if (!userActivity) {
+        console.log("User activity not found for receiver:", receiverId);
+        return false; // Assume the user is not active if no activity is found
+    }
+
+    const isActive = userActivity.activeChat === senderId;
+    console.log("Is User Active on Chat:", isActive);
+    return isActive;
 };
 
 

@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173"],
+        origin: [process.env.FRONTEND_URL],
     },
 });
 
@@ -18,6 +18,8 @@ export function getReceiverSocketId(userId) {
 }
 
 export function getUserActivity(userId) {
+    console.log("Fetching user activity for:", userId);
+    console.log("Current userActivityMap:", userActivityMap);
     return userActivityMap[userId] || null;
 }
 
@@ -36,6 +38,7 @@ io.on("connection", (socket) => {
 
     // Listen for activity updates
     socket.on("updateActivity", ({ userId, activeChat }) => {
+        console.log("Received updateActivity event:", { userId, activeChat });
         if (userId) {
             if (activeChat) {
                 // Update the user's activity to reflect the active chat

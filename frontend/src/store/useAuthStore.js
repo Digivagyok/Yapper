@@ -114,6 +114,8 @@ const useAuthStore = create((set, get) => ({
             console.log("Online users received:", userIds); // Debugging log
             set({ onlineUsers: userIds });
         });
+
+        //window.socket = socket; //open the socket for dev purposes
     },
 
     disconnectSocket: () => {

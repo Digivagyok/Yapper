@@ -13,7 +13,7 @@ export default async function subscribeUserToPush(userId) {
     console.log("Generated subscription:", subscription);
 
     // Send subscription to your server
-    const response = await fetch("http://localhost:5001/api/subscriptions/subscribe", {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/subscriptions/subscribe`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
