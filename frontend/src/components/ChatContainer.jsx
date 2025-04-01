@@ -8,7 +8,7 @@ import { formatMessageTime } from "../lib/utils";
 
 export default function ChatContainer() {
     const { messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeFromMessages } = useChatStore();
-    const { authUser } = useAuthStore();
+    const { authUser, updateActivity } = useAuthStore();
     const messageEndRef = useRef(null);
 
     useEffect(() => {
@@ -16,8 +16,14 @@ export default function ChatContainer() {
 
         subscribeToMessages();
 
-        return () => unsubscribeFromMessages();
-    }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
+        // Notify the backend about the authenticated user's current activity
+        updateActivity(selectedUser._id); // Notify that the authenticated user is viewing this chat
+
+        return () => {
+            unsubscribeFromMessages();
+            updateActivity(null);
+        }
+    }, [authUser._id, selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages, updateActivity]);
 
     useEffect(() => {
         if (messageEndRef.current && messages){
