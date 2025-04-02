@@ -8,6 +8,7 @@ import path from "path";
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js"
+import subscribeRoutes from "./routes/subscribe.route.js";
 
 import {app, server} from "./lib/socket.js"
 
@@ -25,6 +26,7 @@ app.use(cors({
 
 app.use("/api/auth/", authRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/subscribe", subscribeRoutes);
 
 if (process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, "../frontend/dist")));

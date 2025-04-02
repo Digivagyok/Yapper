@@ -2,6 +2,7 @@ import {create} from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import {io} from "socket.io-client";
+import YapperToast from "../components/YapperToast.jsx";
 
 const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
 
@@ -64,7 +65,8 @@ const useAuthStore = create((set, get) => ({
         try {
             await axiosInstance.post("/auth/logout");
             set({authUser: null});
-            toast.success("Sikeres kijelentkezés");
+            YapperToast.info("Sikeres kijelentkezés");
+            
 
             get().disconnectSocket();
         } catch(error){

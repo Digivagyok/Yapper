@@ -4,8 +4,12 @@ import Sidebar from "../components/Sidebar";
 import NoChatSelected from "../components/NoChatSelected";
 import ChatContainer from "../components/ChatContainer";
 
+import YapperToast from "../components/YapperToast";
+
 export default function HomePage(){
     const { selectedUser, showSideBar } = useChatStore();
+
+    YapperToast.info("Sikeres kijelentkezés");
     
     return (
         <div className="h-screen bg-base-200">
